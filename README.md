@@ -19,7 +19,7 @@ The rules of the games that I followed were:
 
 Each of the robots has their own temper and makes a decisions based on it. The game can be played over and over again with the same players as initiated at the beginning. 
 
-A put comments in the code to clarify myself, hope to find it useful.
+I put comments in the code to clarify myself, hope to find it useful.
 
 I dare you to try to beat them! 
 
