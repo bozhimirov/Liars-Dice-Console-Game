@@ -151,8 +151,11 @@ def print_if_liar(current_player, last_player, player_turn, language):
     showing_string = ''
     for pln, d in player_turn.items():
         showing_string += pln
-        word = check_language(language, ' has ', ' има ')
-        showing_string += word
+        if language:
+            word = ' has '
+        else:
+            word = ' има '
+        showing_string += str(word)
         showing_string += ', '.join(map(str, d))
         showing_string += ' ; '
     print(f'{showing_string[:-2]}')
