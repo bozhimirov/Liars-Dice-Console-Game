@@ -114,7 +114,7 @@ def place_bet(current_bet, player_name, players, language):
     check_language(language,
                    f'{player_name} bet for at least {current_bet[0]} dice with face number {current_bet[1]}.',
                    f'{player_name} залага за най-малко {current_bet[0]} зарове със стойност {current_bet[1]}.')
-    pause(2)
+    pause()
     previous_bet = current_bet
     liar_statement = False
     return [liar_statement, previous_bet]

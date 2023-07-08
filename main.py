@@ -82,10 +82,10 @@ while active_game:
             liar = False
             if current_bidder == human_player:
                 check_language(english_language, "It's your turn now!", "Твой ред е!")
-                pause(0.5)
+                pause(1)
                 check_language(english_language, f"There are {sum_dice} dice on the table.",
                                f"Има {sum_dice} зарчета на масата.")
-                pause(0.5)
+                pause(1)
                 check_language(english_language, f"You have in your hand: {players_turn[human_player]}.",
                                f"В ръката си имаш: {players_turn[human_player]}.")
                 pause()
@@ -157,6 +157,7 @@ while active_game:
                 break
             last_bidder = current_bidder
             next_turn(game_players)
+            pause()
             sum_dice = check_sum_dice(game_players)
             check_who_is_liar = False
 

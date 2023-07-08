@@ -147,7 +147,7 @@ def check_if_players_are_bluffing(players, wild):
 #  -- when someone is challenged show dice in players hand --
 def print_if_liar(current_player, last_player, player_turn, language):
     check_language(language, f'{current_player} called {last_player} a liar. Everyone showing their dice.', f'{current_player} нарече {last_player} лъжец. Всички играчи показват заровете си.')
-    pause(2)
+    pause()
     showing_string = ''
     for pln, d in player_turn.items():
         showing_string += pln
@@ -156,7 +156,7 @@ def print_if_liar(current_player, last_player, player_turn, language):
         showing_string += ', '.join(map(str, d))
         showing_string += ' ; '
     print(f'{showing_string[:-2]}')
-    pause(2)
+    pause()
 
 
 #  -- get player by name if name is a string, not object --
