@@ -20,4 +20,5 @@ def choose_language(human_answer):
 def check_language(english_language, english, bulgarian):
     if english_language:
         print(english)
-    print(bulgarian)
+    else:
+        print(bulgarian)
