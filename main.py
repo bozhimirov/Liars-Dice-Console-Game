@@ -96,14 +96,14 @@ while active_game:
                                    f"Направи залог [b] или наречи {last_bidder} лъжец [l]?")
                     human_bet = input().strip()
                     action = choose_action(human_bet, english_language)
-                    pause()
+                    pause(0.5)
 
                     if action == 'bet':
                         check_language(english_language, 'What is your choice?', 'Какъв е твоят избор?')
                         check_language(english_language,
                                        'Place your bet in format [count of dice] [face of die] separated by space.',
                                        'Направи залог във формат [брой зарове] [стойност на зара] разделени с интервал.')
-                        check_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, english_language)
+                        liar, old_bet = check_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, english_language)
 
                     else:
                         liar = True
@@ -115,7 +115,7 @@ while active_game:
                                    'separated by space.',
                                    'Направи валиден залог! Направи залог във формат [брой зарове] [стойност на зара] '
                                    'разделени с интервал.')
-                    check_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, english_language)
+                    liar, old_bet = check_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, english_language)
                     pause()
 
             else:
