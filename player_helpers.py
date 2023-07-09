@@ -96,8 +96,8 @@ def check_who_lose_die(c_bidder, l_bidder, players_turns, last_bet, g_players, g
         choosing_player_to_start(l_bidder, g_players, g_players_names)
     else:
         check_language(language,
-                       f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {l_bidder} lose a dice.',
-                       f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {l_bidder} губи зарче.')
+                       f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {c_bidder} lose a dice.',
+                       f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {c_bidder} губи зарче.')
         pause()
         remove_dice(g_players, c_bidder)
         g_players_names = players_active(g_players, g_players_names, language)
