@@ -171,5 +171,5 @@ while active_game:
         '[y/n]'
     )
     answer = input().strip()
-    check_answer(answer, english_language)
+    active_game = check_answer(answer, english_language)
     pause()
