@@ -2,7 +2,7 @@ import random
 from collections import deque
 
 from betting_helpers import check_if_bet_is_valid, calc_bet_according_to_temper, bluff_bet, place_bet
-from helper_functions import choose_game_mode, choose_action, check_answer, check_sum_dice, roll_dice
+from helper_functions import choose_game_mode, choose_action, check_answer, check_sum_dice, roll_dice, validate_name
 from language_helpers import check_language, choose_language
 from pause import pause
 from player_helpers import add_player, create_list_of_players, get_players_name, choosing_player_to_start, next_turn, \
@@ -18,7 +18,7 @@ print("Choose language/Избери език")
 print("Please type 'e' for English or/или напишете 'b' за Български")
 english_language = choose_language(input().strip())
 check_language(english_language, "What is your name?", "Какво е вашето име?")
-human_player = input()
+human_player = validate_name(input().strip(), english_language)
 add_player(human_player, list_names_of_bots, game_players, english_language)
 
 pause(0.5)
