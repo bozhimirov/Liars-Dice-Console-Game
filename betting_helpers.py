@@ -177,6 +177,21 @@ def calc_bet_according_to_temper(last_bet, current_player, last_player, sum_of_d
 
 
 #  -- calculate bluff bet --
+def dice_modifier(prev_dice, wild):
+    if prev_dice == 6:
+        new_dice = 6
+    elif prev_dice == 0:
+        if wild:
+            prev_dice = 1
+            new_dice = 2
+        else:
+            new_dice = 1
+    else:
+        new_dice = prev_dice + 1
+
+    return [prev_dice, new_dice]
+
+
 def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild, opponents_chance):
     if type(current_player) == str:
         current_player = get_player_by_name(current_player, players)
@@ -219,16 +234,7 @@ def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild,
                 else:
                     for index in range(sum_of_dice):
                         new_count = random.randint((index + 1), (index + 2))
-                        if prev_dice == 6:
-                            new_dice = 6
-                        elif prev_dice == 0:
-                            if wild:
-                                prev_dice = 1
-                                new_dice = 2
-                            else:
-                                new_dice = 1
-                        else:
-                            new_dice = prev_dice + 1
+                        dice_modifier(prev_dice, wild)
                         new_bet_to_be_checked = [new_count, new_dice]
                         valid_condition = valid_bet(new_bet_to_be_checked, prev_bet, sum_of_dice)
                         if valid_condition:
@@ -259,7 +265,7 @@ def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild,
                     new_count = random.randint(index, (index + 2))
                 else:
                     new_count = random.randint(index, (index + 1))
-
+                dice_modifier(prev_dice, wild)
                 if prev_dice == 6:
                     new_dice = 6
                 elif prev_dice == 0:
