@@ -86,7 +86,6 @@ while active_game:
                     if action == 'bet':
                         text_place_bet(english_language)
                         new_human_bet = validate_if_bet_is_valid(old_bet, sum_dice, english_language)
-                        print(new_human_bet)
                         liar, old_bet = place_bet(new_human_bet, current_bidder, game_players, english_language)
 
                     else:
