@@ -1,4 +1,4 @@
-from betting_helpers import place_bet
+
 from text_instructions import text_valid_action_again, text_name_len_more_than_two, text_make_valid_choice, \
     text_choose_valid_mode, text_valid_bet_again, text_valid_language
 
@@ -56,9 +56,8 @@ def validate_game_mode(human_answer, language):
         return new_w_mode
 
 
-def validate_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, language):
+def validate_if_bet_is_valid(old_bet, sum_dice, language):
     valid_human_bet = False
-    new_human_bet = []
 
     while not valid_human_bet:
         new_human_bet = input().strip() \
@@ -66,7 +65,7 @@ def validate_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, la
         valid_human_bet = valid_bet(new_human_bet, old_bet, sum_dice)
         if not valid_human_bet:
             text_valid_bet_again(language)
-            return place_bet(new_human_bet, current_bidder, game_players, language)
+            return new_human_bet
 
 
 # -- validate bets --
@@ -103,4 +102,3 @@ def validate_language(human_answer):
         new_human_answer = input().strip()
         language = validate_language(new_human_answer)
         return language
-

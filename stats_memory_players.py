@@ -1,4 +1,9 @@
-from player_helpers import get_player_by_name
+
+#  -- get player by name if name is a string, not object --
+def get_player_by_name(player_name, players):
+    for pl in players:
+        if pl.name == player_name:
+            return pl
 
 
 #  -- load dice values when new round starts --

@@ -85,8 +85,8 @@ while active_game:
 
                     if action == 'bet':
                         text_place_bet(english_language)
-                        liar, old_bet = validate_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder,
-                                                                 english_language)
+                        new_human_bet = validate_if_bet_is_valid(old_bet, sum_dice, english_language)
+                        liar, old_bet = place_bet(new_human_bet, current_bidder, game_players, english_language)
 
                     else:
                         liar = True
@@ -94,9 +94,10 @@ while active_game:
                     liar = True
                 else:
                     text_place_bet(english_language)
-                    liar, old_bet = validate_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder,
-                                                             english_language)
-                    pause()
+                    new_human_bet = validate_if_bet_is_valid(old_bet, sum_dice, english_language)
+                    liar, old_bet = place_bet(new_human_bet, current_bidder, game_players, english_language)
+
+                pause()
 
             else:
                 new_bet = calc_bet_according_to_temper(old_bet, current_bidder, last_bidder, sum_dice, game_players,

@@ -2,6 +2,7 @@ import random
 
 from pause import pause
 from player import Player
+from stats_memory_players import get_player_by_name
 from text_instructions import text_choose_name_again, text_incorrect_input_opponents, text_left_game, \
     text_result_and_who_lose_die, text_someone_call_other_liar, get_verb
 
@@ -147,13 +148,6 @@ def print_if_liar(current_player, last_player, player_turn, language):
         showing_string += ' ; '
     print(f'{showing_string[:-2]}')
     pause()
-
-
-#  -- get player by name if name is a string, not object --
-def get_player_by_name(player_name, players):
-    for pl in players:
-        if pl.name == player_name:
-            return pl
 
 
 #  -- remove dice from player --

@@ -26,16 +26,15 @@ def text_choose_opponents(english_language):
 # -- function to print text on console asking for game mode--
 def text_choose_mode(english_language):
     choose_language(english_language, "Choose gaming mode. Please type 'n' for regular game, or type 'w' for accessing "
-                                     "wild one's mode.",
-                   "Изберете ниво на трудност. Моля напишете 'n' за обикновена игра "
-                   "или напишете 'w' за да влезете в режим 'луди единици'.")
+                                      "wild one's mode.", "Изберете ниво на трудност. Моля напишете 'n' за обикновена "
+                                                          "игра или напишете 'w' за да влезете в режим 'луди единици'.")
 
 
 # -- function to print text on console telling number of active players--
 def text_tell_len_players(english_language, game_players_names):
     choose_language(english_language,
-                   f"There are {len(game_players_names)} players on the table - {', '.join(game_players_names)} ",
-                   f"Има {len(game_players_names)} играчи на масата - {', '.join(game_players_names)} ")
+                    f"There are {len(game_players_names)} players on the table - {', '.join(game_players_names)} ",
+                    f"Има {len(game_players_names)} играчи на масата - {', '.join(game_players_names)} ")
     pause()
 
 
@@ -48,7 +47,7 @@ def text_choosing_player(english_language):
 # -- function to print text on console telling who starts the game--
 def text_who_starts_the_game(english_language, game_players):
     choose_language(english_language, f'{game_players[0].name} starts the game.',
-                   f'{game_players[0].name} започва играта.')
+                    f'{game_players[0].name} започва играта.')
     pause()
 
 
@@ -61,8 +60,8 @@ def line(num):
 def text_new_round_number(english_language, game_round, game_players_names, sum_dice):
     choose_language(english_language, f'Starting round {game_round}.', f'Започва рунд {game_round}.')
     choose_language(english_language,
-                   f'There are {len(game_players_names)} players with total {sum_dice} dice on the table.',
-                   f'Има {len(game_players_names)} играчи с общо {sum_dice} зарове на масата.')
+                    f'There are {len(game_players_names)} players with total {sum_dice} dice on the table.',
+                    f'Има {len(game_players_names)} играчи с общо {sum_dice} зарове на масата.')
     pause()
 
 
@@ -71,10 +70,10 @@ def text_your_turn_and_info(english_language, sum_dice, players_turn, human_play
     choose_language(english_language, "It's your turn now!", "Твой ред е!")
     pause(1)
     choose_language(english_language, f"There are {sum_dice} dice on the table.",
-                   f"Има {sum_dice} зарчета на масата.")
+                    f"Има {sum_dice} зарчета на масата.")
     pause(1)
     choose_language(english_language, f"You have in your hand: {players_turn[human_player]}.",
-                   f"В ръката си имаш: {players_turn[human_player]}.")
+                    f"В ръката си имаш: {players_turn[human_player]}.")
     pause()
 
 
@@ -82,21 +81,21 @@ def text_your_turn_and_info(english_language, sum_dice, players_turn, human_play
 def text_if_there_is_last_bidder(english_language, last_bidder):
     ask_for_choice(english_language)
     choose_language(english_language, f"Place a bet [b] or call {last_bidder} a liar [l]?",
-                   f"Направи залог [b] или наречи {last_bidder} лъжец [l]?")
+                    f"Направи залог [b] или наречи {last_bidder} лъжец [l]?")
 
 
 # -- print text asking valid bet --
 def text_place_bet(english_language):
     ask_for_choice(english_language)
     choose_language(english_language,
-                   'Place your bet in format [count of dice] [face of die] separated by space.',
-                   'Направи залог във формат [брой зарове] [стойност на зара] разделени с интервал.')
+                    'Place your bet in format [count of dice] [face of die] separated by space.',
+                    'Направи залог във формат [брой зарове] [стойност на зара] разделени с интервал.')
 
 
 # -- print announcement of winner and congrats --
 def text_tell_winner(english_language, game_players_names):
     choose_language(english_language, f'The winner is {game_players_names[0]}.',
-                   f'Победителят е {game_players_names[0]}.')
+                    f'Победителят е {game_players_names[0]}.')
     choose_language(english_language, 'Congratulations!', 'Поздравления!')
     pause()
 
@@ -120,38 +119,38 @@ def text_player_bet(language, player_name, current_bet):
 # --  print asks for valid action again --
 def text_valid_action_again(language):
     choose_language(language, "Please make a valid choice! Type 'b' or 'l'. ", "Моля направете валиден избор! "
-                                                                              "Напишете 'b' или 'l'. ")
+                                                                               "Напишете 'b' или 'l'. ")
 
 
 # -- print asks for length more than 2 symbols --
 def text_name_len_more_than_two(language):
     choose_language(language, "Please write a name longer than 2 symbols!",
-                   "Моля напишете име с дължина повече от 2 символа!")
+                    "Моля напишете име с дължина повече от 2 символа!")
 
 
 # -- print ask for valid choice --
 def text_make_valid_choice(language):
-    choose_language(language, "Please make your choice by pressing 'y' or 'n' button on your keyboard!", "Моля "
-                                                                                                        "направете избор като натиснете 'y' или 'n' бутона на клавиатурата си!")
+    choose_language(language, "Please make your choice by pressing 'y' or 'n' button on your keyboard!",
+                    "Моля направете избор като натиснете 'y' или 'n' бутона на клавиатурата си!")
 
 
 # -- print ask for valid mode --
 def text_choose_valid_mode(language):
-    choose_language(language, "Please make your choice by pressing 'w' or 'n' button on your keyboard!", "Моля "
-                                                                                                        "направете своя избор като натиснете 'w' или 'n' бутона на клавиатурата си!")
+    choose_language(language, "Please make your choice by pressing 'w' or 'n' button on your keyboard!",
+                    "Моля направете своя избор като натиснете 'w' или 'n' бутона на клавиатурата си!")
     choose_language(language, "By pressing 'w' you will enter advanced wild one's mode. By pressing 'n' you will "
-                             "play a regular game.", "Натискайки 'w' ще задействате режима на лудите единици. "
-                                                     "Натискайки 'n' ще играете обикновена игра.")
+                              "play a regular game.", "Натискайки 'w' ще задействате режима на лудите единици. "
+                                                      "Натискайки 'n' ще играете обикновена игра.")
 
 
 # -- print ask for valid bet again --
 def text_valid_bet_again(language):
     choose_language(language, 'Please place valid bet! Place bet in format: '
-                             '[count of dice] [face of die] separated by space.'
-                             'You should rise the last bid and type only numbers!',
-                   'Моля направете валиден залог! Напишете залог във формат: '
-                   '[брой зарове] [стойност на зара] разделени с интервал.'
-                   'Трябва да вдигнете последният залог и да пишете само с цифри!')
+                              '[count of dice] [face of die] separated by space.'
+                              'You should rise the last bid and type only numbers!',
+                    'Моля направете валиден залог! Напишете залог във формат: '
+                    '[брой зарове] [стойност на зара] разделени с интервал.'
+                    'Трябва да вдигнете последният залог и да пишете само с цифри!')
 
 
 # -- print ask for valid language choice --
@@ -185,8 +184,10 @@ def text_left_game(language, inactive_names):
 # -- print result and who lost a die --
 def text_result_and_who_lose_die(language, number_of_dices_of_searched_number, searched_number, l_bidder):
     choose_language(language,
-                    f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {l_bidder} lose a dice.',
-                    f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {l_bidder} губи зарче.')
+                    f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {l_bidder} '
+                    f'lose a dice.',
+                    f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {l_bidder}'
+                    f' губи зарче.')
     pause()
 
 
