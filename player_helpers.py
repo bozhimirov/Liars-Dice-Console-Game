@@ -1,8 +1,9 @@
 import random
 
-from language_helpers import check_language
 from pause import pause
 from player import Player
+from text_instructions import text_choose_name_again, text_incorrect_input_opponents, text_left_game, \
+    text_result_and_who_lose_die, text_someone_call_other_liar, get_verb
 
 
 # -- adding player object --
@@ -12,8 +13,7 @@ def add_player(player, list_names_of_bots, game_players, language):
         game_players.append(player_object)
         return game_players
     else:
-        check_language(language, "Name taken, please choose another username.",
-                       "Името е заето, моля изберете друго име.")
+        text_choose_name_again(language)
         human = add_player(input(), list_names_of_bots, game_players, language)
         return human
 
@@ -28,13 +28,11 @@ def create_list_of_players(number_of_bots, list_names_of_bots, game_players, lan
                 add_player(c, list_names_of_bots, game_players, language)
             return int(number_of_bots)
         else:
-            check_language(language,
-                           "Incorrect input. Please type just one number for opponents between 1 and 10.",
-                           "Грешна стойност. Моля напишете само едно число за брой противници в интервала от 1 до 10.")
+            text_incorrect_input_opponents(language)
             create_list_of_players(input(), list_names_of_bots, game_players, language)
     else:
-        check_language(language, "Incorrect input. Please type just one number for opponents between 1 and 10.",
-                       "Грешна стойност. Моля напишете само едно число за брой противници в интервала от 1 до 10.")
+
+        text_incorrect_input_opponents(language)
         create_list_of_players(input(), list_names_of_bots, game_players, language)
 
 
@@ -66,9 +64,7 @@ def players_active(players, game_players_names, language):
             else:
                 players_names.append(player.name)
     if inactive_names:
-        check_language(language, f'Player {inactive_names[0]} left the game.',
-                       f'Играч {inactive_names[0]} напусна играта.')
-        pause()
+        text_left_game(language, inactive_names)
         return players_names
     else:
         return players_names
@@ -87,18 +83,13 @@ def check_who_lose_die(c_bidder, l_bidder, players_turns, last_bet, g_players, g
                 if v[i] == searched_number:
                     number_of_dices_of_searched_number += 1
     if number_of_dices_of_searched_number < int(last_bet[0]):
-        check_language(language,
-                       f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {l_bidder} lose a dice.',
-                       f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {l_bidder} губи зарче.')
-        pause()
+        text_result_and_who_lose_die(language, number_of_dices_of_searched_number, searched_number, l_bidder)
         remove_dice(g_players, l_bidder)
         g_players_names = players_active(g_players, g_players_names, language)
         choosing_player_to_start(l_bidder, g_players, g_players_names)
     else:
-        check_language(language,
-                       f'There are {number_of_dices_of_searched_number} numbers of {searched_number} dices. {c_bidder} lose a dice.',
-                       f'Има {number_of_dices_of_searched_number} броя зарове със стойност {searched_number}. {c_bidder} губи зарче.')
-        pause()
+
+        text_result_and_who_lose_die(language, number_of_dices_of_searched_number, searched_number, c_bidder)
         remove_dice(g_players, c_bidder)
         g_players_names = players_active(g_players, g_players_names, language)
         choosing_player_to_start(c_bidder, g_players, g_players_names)
@@ -146,15 +137,11 @@ def check_if_players_are_bluffing(players, wild):
 
 #  -- when someone is challenged show dice in players hand --
 def print_if_liar(current_player, last_player, player_turn, language):
-    check_language(language, f'{current_player} called {last_player} a liar. Everyone showing their dice.', f'{current_player} нарече {last_player} лъжец. Всички играчи показват заровете си.')
-    pause()
+    text_someone_call_other_liar(language, current_player, last_player)
     showing_string = ''
     for pln, d in player_turn.items():
         showing_string += pln
-        if language:
-            word = ' has '
-        else:
-            word = ' има '
+        word = get_verb(language)
         showing_string += str(word)
         showing_string += ', '.join(map(str, d))
         showing_string += ' ; '

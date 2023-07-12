@@ -1,67 +1,6 @@
 import random
 
-from language_helpers import check_language
 from stats_memory_players import load_stat, load_initial_memory
-
-
-# -- choose human action - bet or liar --
-def choose_action(string, language):
-    if string.lower() == 'b':
-        return 'bet'
-    elif string.lower() == 'l':
-        return 'liar'
-    else:
-        check_language(language, "Please make a valid choice! Type 'b' or 'l'. ", "Моля направете валиден избор! "
-                                                                                  "Напишете 'b' или 'l'. ")
-        new_human_string = input().strip()
-        human_action = choose_action(new_human_string, language)
-        return human_action
-
-
-# -- validate name of human player / cannot be blank / --
-def validate_name(name, language):
-    if len(name) < 2:
-        check_language(language, "Please write a name longer than 2 symbols!",
-                       "Моля напишете име с дължина повече от 2 символа!")
-        new_human_name = input().strip()
-        new_name = validate_name(new_human_name, language)
-        return new_name
-    return name
-
-
-# -- check answer if human wants to play again with the same players--
-def check_answer(human_answer, language):
-    if human_answer.lower() == 'y':
-        game_active = True
-        return game_active
-    elif human_answer.lower() == 'n':
-        game_active = False
-        return game_active
-    else:
-        check_language(language, "Please make your choice by pressing 'y' or 'n' button on your keyboard!", "Моля "
-                                                                                                            "направете избор като натиснете 'y' или 'n' бутона на клавиатурата си!")
-        new_human_answer = input().strip()
-        new_game_active = check_answer(new_human_answer, language)
-        return new_game_active
-
-
-#  -- human choice for game mode regular/normal or advanced/wild ones --
-def choose_game_mode(human_answer, language):
-    if human_answer.lower() == 'w':
-        w_mode = True
-        return w_mode
-    elif human_answer.lower() == 'n':
-        w_mode = False
-        return w_mode
-    else:
-        check_language(language, "Please make your choice by pressing 'w' or 'n' button on your keyboard!", "Моля "
-                                                                                                            "направете своя избор като натиснете 'w' или 'n' бутона на клавиатурата си!")
-        check_language(language, "By pressing 'w' you will enter advanced wild one's mode. By pressing 'n' you will "
-                                 "play a regular game.", "Натискайки 'w' ще задействате режима на лудите единици. "
-                                                         "Натискайки 'n' ще играете обикновена игра.")
-        new_human_answer = input().strip()
-        new_w_mode = check_answer(new_human_answer, language)
-        return new_w_mode
 
 
 #  -- roll dice when starting new round --
@@ -86,3 +25,11 @@ def roll_dice(players, g_round):
 # -- the sum of all dices on the table --
 def check_sum_dice(players):
     return sum([player.dice for player in players])
+
+
+# -- print text according to game language --
+def choose_language(english_language, english, bulgarian):
+    if english_language:
+        print(english)
+    else:
+        print(bulgarian)

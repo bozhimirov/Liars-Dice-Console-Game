@@ -1,11 +1,10 @@
 import random
 
-from language_helpers import check_language
-from pause import pause
 from player_helpers import get_player_by_name, add_turns_to_player
 from probability_calculation import calculate_probability
-
 from stats_memory_players import load_memory
+from text_instructions import text_player_bet
+from validators import valid_bet
 
 
 # --calculate test new  bet --
@@ -89,32 +88,11 @@ def if_not_blank_bet(player, last_bet, opponents_chance, sum_of_dice, players, w
     return [sum_dice_in_memory, probability_by_memory, new_test_bet]
 
 
-def check_if_bet_is_valid(old_bet, sum_dice, game_players, current_bidder, language):
-    valid_human_bet = False
-    new_human_bet = []
-
-    while not valid_human_bet:
-        new_human_bet = input().strip() \
-            .split(' ')
-        valid_human_bet = valid_bet(new_human_bet, old_bet, sum_dice)
-        if not valid_human_bet:
-            check_language(language, 'Please place valid bet! Place bet in format: '
-                                     '[count of dice] [face of die] separated by space.'
-                                     'You should rise the last bid and type only numbers!',
-                           'Моля направете валиден залог! Напишете залог във формат: '
-                           '[брой зарове] [стойност на зара] разделени с интервал.'
-                           'Трябва да вдигнете последният залог и да пишете само с цифри!')
-    return place_bet(new_human_bet, current_bidder, game_players, language)
-
-
 # -- place bet on table --
 def place_bet(current_bet, player_name, players, language):
     load_memory(player_name, current_bet, players)
     add_turns_to_player(player_name, players)
-    check_language(language,
-                   f'{player_name} bet for at least {current_bet[0]} dice with face number {current_bet[1]}.',
-                   f'{player_name} залага за най-малко {current_bet[0]} зарове със стойност {current_bet[1]}.')
-    pause()
+    text_player_bet(language, player_name, current_bet)
     previous_bet = current_bet
     liar_statement = False
     return [liar_statement, previous_bet]
@@ -286,25 +264,3 @@ def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild,
             return new_bet_to_be_checked
     return []
 
-
-# -- validate bets --
-def valid_bet(current_bet, previous_bet, sum_of_dice):
-    if len(current_bet) != 2:
-        return False
-    elif not (str(current_bet[0]).isdigit() and str(current_bet[1]).isdigit()):
-        return False
-    else:
-        if previous_bet == ['0', '0']:
-            if (1 <= int(current_bet[0]) <= sum_of_dice) and (1 <= int(current_bet[1]) <= 6):
-                return True
-            else:
-                return False
-        else:
-            if (sum_of_dice >= int(current_bet[0]) > int(previous_bet[0]) and (
-                    int(previous_bet[1]) == int(current_bet[1]))) \
-                    or ((1 <= int(previous_bet[0]) <= sum_of_dice) and int(current_bet[1]) > int(previous_bet[1])):
-                if int(current_bet[1]) > 6:
-                    return False
-                return True
-            else:
-                return False
