@@ -65,7 +65,7 @@ def validate_if_bet_is_valid(old_bet, sum_dice, language):
         valid_human_bet = valid_bet(new_human_bet, old_bet, sum_dice)
         if not valid_human_bet:
             text_valid_bet_again(language)
-            return new_human_bet
+    return new_human_bet
 
 
 # -- validate bets --
