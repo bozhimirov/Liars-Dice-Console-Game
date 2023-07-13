@@ -1,10 +1,9 @@
-
 from text_instructions import text_valid_action_again, text_name_len_more_than_two, text_make_valid_choice, \
     text_choose_valid_mode, text_valid_bet_again, text_valid_language
 
 
 # -- choose human action - bet or liar --
-def validate_input_action(string, language):
+def validate_input_action(string: str, language: bool) -> str:
     if string.lower() == 'b':
         return 'bet'
     elif string.lower() == 'l':
@@ -17,7 +16,7 @@ def validate_input_action(string, language):
 
 
 # -- validate name of human player / cannot be blank / --
-def validate_name(name, language):
+def validate_name(name: str, language: bool) -> str:
     if len(name) < 2:
         text_name_len_more_than_two(language)
         new_human_name = input().strip()
@@ -27,7 +26,7 @@ def validate_name(name, language):
 
 
 # -- check answer if human wants to play again with the same players--
-def validate_input_answer(human_answer, language):
+def validate_input_answer(human_answer: str, language: bool) -> bool:
     if human_answer.lower() == 'y':
         game_active = True
         return game_active
@@ -42,7 +41,7 @@ def validate_input_answer(human_answer, language):
 
 
 #  -- human choice for game mode regular/normal or advanced/wild ones --
-def validate_game_mode(human_answer, language):
+def validate_game_mode(human_answer: str, language: bool) -> bool:
     if human_answer.lower() == 'w':
         w_mode = True
         return w_mode
@@ -56,9 +55,9 @@ def validate_game_mode(human_answer, language):
         return new_w_mode
 
 
-def validate_if_bet_is_valid(old_bet, sum_dice, language):
+def validate_if_bet_is_valid(old_bet: list, sum_dice: int, language: bool) -> list:
     valid_human_bet = False
-
+    new_human_bet = []
     while not valid_human_bet:
         new_human_bet = input().strip() \
             .split(' ')
@@ -69,7 +68,7 @@ def validate_if_bet_is_valid(old_bet, sum_dice, language):
 
 
 # -- validate bets --
-def valid_bet(current_bet, previous_bet, sum_of_dice):
+def valid_bet(current_bet: list, previous_bet: list, sum_of_dice: int) -> bool:
     if len(current_bet) != 2:
         return False
     elif not (str(current_bet[0]).isdigit() and str(current_bet[1]).isdigit()):
@@ -92,7 +91,7 @@ def valid_bet(current_bet, previous_bet, sum_of_dice):
 
 
 #  -- human choice for language preferences --
-def validate_language(human_answer):
+def validate_language(human_answer: str) -> bool:
     if human_answer.lower() == 'e':
         return True
     elif human_answer.lower() == 'b':

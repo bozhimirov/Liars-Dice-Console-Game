@@ -3,7 +3,7 @@ import random
 
 # -- player class to create both human and bot players --
 class Player:
-    def __init__(self, player_name):
+    def __init__(self, player_name: str) -> None:
         self.turns = 1
         self.name = player_name
         self.dice = 5
@@ -22,19 +22,18 @@ class Player:
         # here is how opponent bots see temper of the player
         self.temper_for_other_players = 0
 
-    def restore_dice(self):
+    def restore_dice(self) -> None:
         self.dice = 5
 
-    def clear_stat(self):
+    def clear_stat(self) -> None:
         self.stat = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
-    def clear_memory(self):
+    def clear_memory(self) -> None:
         self.memory = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
-    def clear_dice_stat_profile_for_opponents(self):
+    def clear_dice_stat_profile_for_opponents(self) -> None:
         self.profile_for_opponents['called_dice'] = [0, {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}]
 
-    def calculate_temper_for_opponents(self):
+    def calculate_temper_for_opponents(self) -> None:
         self.temper_for_other_players = self.profile_for_opponents['tempers'] / self.profile_for_opponents[
             'total_calls']
-

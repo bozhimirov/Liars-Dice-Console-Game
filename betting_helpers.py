@@ -1,5 +1,7 @@
 import random
+from collections import deque
 
+from player import Player
 from player_helpers import get_player_by_name, add_turns_to_player
 from probability_calculation import calculate_probability
 from stats_memory_players import load_memory
@@ -8,7 +10,8 @@ from validators import valid_bet
 
 
 # --calculate test new  bet --
-def calculate_new_bet(last_bet, player, last_player, sum_of_dice, players, wild, opponents_chance):
+def calculate_new_bet(last_bet: list, player: Player, last_player: Player, sum_of_dice: int, players: deque, wild: bool,
+                      opponents_chance: float) -> list:
     if last_player != '':
         if type(last_player) == str:
             last_player = get_player_by_name(last_player, players)
@@ -58,7 +61,8 @@ def calculate_new_bet(last_bet, player, last_player, sum_of_dice, players, wild,
 
 
 #  -- if the new bet is not blank(call previous player liar) --
-def if_not_blank_bet(player, last_bet, opponents_chance, sum_of_dice, players, wild, last_player):
+def if_not_blank_bet(player: Player, last_bet: list, opponents_chance: float, sum_of_dice: int, players: deque,
+                     wild: bool, last_player: Player) -> list:
     if type(player) == str:
         player = get_player_by_name(player, players)
     prev_count, prev_dice = last_bet
@@ -89,17 +93,18 @@ def if_not_blank_bet(player, last_bet, opponents_chance, sum_of_dice, players, w
 
 
 # -- place bet on table --
-def place_bet(current_bet, player_name, players, language):
-    load_memory(player_name, current_bet, players)
-    add_turns_to_player(player_name, players)
-    text_player_bet(language, player_name, current_bet)
+def place_bet(current_bet: list, player: Player, players: deque, language: bool) -> list:
+    load_memory(player, current_bet, players)
+    add_turns_to_player(player, players)
+    text_player_bet(language, player, current_bet)
     previous_bet = current_bet
     liar_statement = False
     return [liar_statement, previous_bet]
 
 
 #  -- according to temper and times player places bet in the round, choose if the bet is bluff or not --
-def calc_bet_according_to_temper(last_bet, current_player, last_player, sum_of_dice, players, wild):
+def calc_bet_according_to_temper(last_bet: list, current_player: Player, last_player: Player, sum_of_dice: int,
+                                 players: deque, wild: bool) -> list:
     new_bet_to_be_checked = []
     current_player_object = get_player_by_name(current_player, players)
     opponents_chance = 0
@@ -155,7 +160,7 @@ def calc_bet_according_to_temper(last_bet, current_player, last_player, sum_of_d
 
 
 #  -- calculate bluff bet --
-def dice_modifier(prev_dice, wild):
+def dice_modifier(prev_dice: int, wild: bool) -> list:
     if prev_dice == 6:
         new_dice = 6
     elif prev_dice == 0:
@@ -170,7 +175,8 @@ def dice_modifier(prev_dice, wild):
     return [prev_dice, new_dice]
 
 
-def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild, opponents_chance):
+def bluff_bet(prev_bet: list, sum_of_dice: int, current_player: Player, last_player: Player, players: deque, wild: bool,
+              opponents_chance: float) -> list:
     if type(current_player) == str:
         current_player = get_player_by_name(current_player, players)
     if last_player != '':
@@ -263,4 +269,3 @@ def bluff_bet(prev_bet, sum_of_dice, current_player, last_player, players, wild,
         if valid_condition:
             return new_bet_to_be_checked
     return []
-

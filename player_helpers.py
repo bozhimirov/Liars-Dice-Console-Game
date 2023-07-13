@@ -1,4 +1,5 @@
 import random
+from collections import deque
 
 from pause import pause
 from player import Player
@@ -8,7 +9,7 @@ from text_instructions import text_choose_name_again, text_incorrect_input_oppon
 
 
 # -- adding player object --
-def add_player(player, list_names_of_bots, game_players, language):
+def add_player(player: str, list_names_of_bots: list, game_players: deque, language: bool) -> deque:
     if player not in list_names_of_bots:
         player_object = Player(player)
         game_players.append(player_object)
@@ -20,7 +21,7 @@ def add_player(player, list_names_of_bots, game_players, language):
 
 
 # -- choosing number of bots and creates list of players with human player --
-def create_list_of_players(number_of_bots, list_names_of_bots, game_players, language):
+def create_list_of_players(number_of_bots: str, list_names_of_bots: list, game_players: deque, language: bool) -> int:
     if number_of_bots.isdigit():
         if 0 < int(number_of_bots) <= 10:
             for j in range(int(number_of_bots)):
@@ -38,23 +39,23 @@ def create_list_of_players(number_of_bots, list_names_of_bots, game_players, lan
 
 
 # -- rotate players --
-def next_turn(players):
+def next_turn(players: deque) -> None:
     players.append(players.popleft())
 
 
 #  -- get names of the players --
-def get_players_name(players):
+def get_players_name(players: deque) -> list:
     return [p.name for p in players]
 
 
 # -- adds how many times player place a bet to self, helps to place bluffs according to temper --
-def add_turns_to_player(player, players):
+def add_turns_to_player(player: Player, players: deque) -> None:
     current_player = get_player_by_name(player, players)
     current_player.turns += 1
 
 
 # -- show inactive player if any --
-def players_active(players, game_players_names, language):
+def players_active(players: deque, game_players_names: list, language: bool) -> list:
     game_players_names = game_players_names
     players_names = []
     inactive_names = []
@@ -72,7 +73,8 @@ def players_active(players, game_players_names, language):
 
 
 #  -- check which player lose a die
-def check_who_lose_die(c_bidder, l_bidder, players_turns, last_bet, g_players, g_players_names, wild, language):
+def check_who_lose_die(c_bidder: Player, l_bidder: Player, players_turns: dict, last_bet: list, g_players: deque,
+                       g_players_names: list, wild: bool, language: bool) -> list:
     searched_number = int(last_bet[1])
     number_of_dices_of_searched_number = 0
     for k, v in players_turns.items():
@@ -98,7 +100,7 @@ def check_who_lose_die(c_bidder, l_bidder, players_turns, last_bet, g_players, g
 
 
 #  -- choose player with dice to start round --
-def choosing_player_to_start(player, games_players, players_names):
+def choosing_player_to_start(player: Player, games_players: deque, players_names: list) -> None:
     if len(players_names) > 1:
         while player != games_players[0].name:
             next_turn(games_players)
@@ -107,7 +109,7 @@ def choosing_player_to_start(player, games_players, players_names):
 
 
 #  -- get the next bidder with dice from players --
-def get_next_bidder(all_game_players):
+def get_next_bidder(all_game_players: deque) -> Player:
     for i in range(len(all_game_players)):
         if all_game_players[i + 1].dice != 0:
             next_index = (i + 1) % len(all_game_players)
@@ -115,7 +117,7 @@ def get_next_bidder(all_game_players):
 
 
 #  -- check if there is a call from player and no such face dice in hand --
-def check_if_players_are_bluffing(players, wild):
+def check_if_players_are_bluffing(players: deque, wild: bool) -> None:
     for player in players:
         bluffer = 0
         if player.profile_for_opponents['called_dice'][0] != 0:
@@ -137,7 +139,7 @@ def check_if_players_are_bluffing(players, wild):
 
 
 #  -- when someone is challenged show dice in players hand --
-def print_if_liar(current_player, last_player, player_turn, language):
+def print_if_liar(current_player: str, last_player: str, player_turn: dict, language: bool) -> None:
     text_someone_call_other_liar(language, current_player, last_player)
     showing_string = ''
     for pln, d in player_turn.items():
@@ -151,7 +153,7 @@ def print_if_liar(current_player, last_player, player_turn, language):
 
 
 #  -- remove dice from player --
-def remove_dice(game_player, loser):
-    player = get_player_by_name(loser, game_player)
+def remove_dice(game_players: deque, loser: Player):
+    player = get_player_by_name(loser, game_players)
     if player.dice > 0:
         player.dice -= 1
