@@ -39,6 +39,8 @@ Also, try to play another game with the same players to check if their profile s
 
 If you have any comments or suggestions, please feel free to share.  
 
+Special Thanks to my most dedicated testers - Simeon and Deyan!
+
 Enjoy!
 
 

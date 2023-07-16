@@ -3,10 +3,9 @@ from collections import deque
 
 from pause import pause
 from player import Player
-from print import Print
 from stats_memory_players import get_player_by_name
-from text_instructions import text_left_game, \
-    text_result_and_who_lose_die, text_someone_call_other_liar
+from text_instructions import text_choose_name_again, text_incorrect_input_opponents, text_left_game, \
+    text_result_and_who_lose_die, text_someone_call_other_liar, get_verb
 
 
 # -- adding player object --
@@ -16,7 +15,7 @@ def add_player(player: str, list_names_of_bots: list, game_players: deque, langu
         game_players.append(player_object)
         return game_players
     else:
-        Print.text_choose_name_again()
+        text_choose_name_again(language)
         human = add_player(input(), list_names_of_bots, game_players, language)
         return human
 
@@ -31,11 +30,11 @@ def create_list_of_players(number_of_bots: str, list_names_of_bots: list, game_p
                 add_player(c, list_names_of_bots, game_players, language)
             return int(number_of_bots)
         else:
-            Print.text_incorrect_input_opponents()
+            text_incorrect_input_opponents(language)
             create_list_of_players(input(), list_names_of_bots, game_players, language)
     else:
 
-        Print.text_incorrect_input_opponents()
+        text_incorrect_input_opponents(language)
         create_list_of_players(input(), list_names_of_bots, game_players, language)
 
 
@@ -145,7 +144,7 @@ def print_if_liar(current_player: str, last_player: str, player_turn: dict, lang
     showing_string = ''
     for pln, d in player_turn.items():
         showing_string += pln
-        word = Print.get_verb()
+        word = get_verb(language)
         showing_string += str(word)
         showing_string += ', '.join(map(str, d))
         showing_string += ' ; '
