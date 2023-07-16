@@ -1,5 +1,4 @@
-from text_instructions import text_valid_action_again, text_name_len_more_than_two, text_make_valid_choice, \
-    text_choose_valid_mode, text_valid_bet_again, text_valid_language
+from print import Print
 
 
 # -- choose human action - bet or liar --
@@ -9,7 +8,7 @@ def validate_input_action(string: str, language: bool) -> str:
     elif string.lower() == 'l':
         return 'liar'
     else:
-        text_valid_action_again(language)
+        Print.text_valid_action_again()
         new_human_string = input().strip()
         human_action = validate_input_action(new_human_string, language)
         return human_action
@@ -18,7 +17,7 @@ def validate_input_action(string: str, language: bool) -> str:
 # -- validate name of human player / cannot be blank / --
 def validate_name(name: str, language: bool) -> str:
     if len(name) < 2:
-        text_name_len_more_than_two(language)
+        Print.text_name_len_more_than_two()
         new_human_name = input().strip()
         new_name = validate_name(new_human_name, language)
         return new_name
@@ -34,7 +33,7 @@ def validate_input_answer(human_answer: str, language: bool) -> bool:
         game_active = False
         return game_active
     else:
-        text_make_valid_choice(language)
+        Print.text_make_valid_choice()
         new_human_answer = input().strip()
         new_game_active = validate_input_answer(new_human_answer, language)
         return new_game_active
@@ -49,13 +48,13 @@ def validate_game_mode(human_answer: str, language: bool) -> bool:
         w_mode = False
         return w_mode
     else:
-        text_choose_valid_mode(language)
+        Print.text_choose_valid_mode()
         new_human_answer = input().strip()
         new_w_mode = validate_input_answer(new_human_answer, language)
         return new_w_mode
 
 
-def validate_if_bet_is_valid(old_bet: list, sum_dice: int, language: bool) -> list:
+def validate_if_bet_is_valid(old_bet: list, sum_dice: int) -> list:
     valid_human_bet = False
     new_human_bet = []
     while not valid_human_bet:
@@ -63,7 +62,7 @@ def validate_if_bet_is_valid(old_bet: list, sum_dice: int, language: bool) -> li
             .split(' ')
         valid_human_bet = valid_bet(new_human_bet, old_bet, sum_dice)
         if not valid_human_bet:
-            text_valid_bet_again(language)
+            Print.text_valid_bet_again()
     return new_human_bet
 
 
@@ -97,7 +96,7 @@ def validate_language(human_answer: str) -> bool:
     elif human_answer.lower() == 'b':
         return False
     else:
-        text_valid_language()
+        Print.text_valid_language()
         new_human_answer = input().strip()
         language = validate_language(new_human_answer)
         return language
